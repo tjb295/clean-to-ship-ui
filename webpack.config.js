@@ -9,9 +9,9 @@ var HTMLWebPackPluginConfig = new HTMLWebPackPlugin({
 module.exports = {
     entry: __dirname + '/src/index.js',
     module: {
-        loaders: [
+        rules: [
             {
-                test: /\.js/,
+                test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader'
             }
@@ -19,7 +19,7 @@ module.exports = {
     },
     output: {
         filename: 'transformed.js',
-        path: __dirname + '/build'
+        path: __dirname + '/backend/build'
     },
     plugins: [HTMLWebPackPluginConfig]
 };

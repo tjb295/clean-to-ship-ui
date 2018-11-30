@@ -3,7 +3,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 var path = require('path');
 
+//graphql setup
+
+
+
 //define routes later
+const databaseRoute = require('./routes/database');
 
 const app = express();
 
@@ -14,8 +19,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //body parser setup
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
-
-app.use('/images', express.static(path.join('backend/images')));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -30,10 +33,22 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', express.static(path,join(__dirname, 'dist')));
+console.log('hel');
+
+// app.use('/graphql', graphql({
+//   schema: schema,
+//   rootValue: root,
+//   graphiql: true
+// }))
+
+app.use('/', express.static(path.join(__dirname, 'build')));
+
+
+app.use('/api/database', databaseRoute);
+console.log('hey');
 
 app.use((req, res, next) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 module.exports = app;

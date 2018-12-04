@@ -8,6 +8,14 @@ const connectionObj = {
     port: 5432
 };
 
+const connectionObj = {
+    user: 'postgres_user',
+    host: '127.0.0.1',
+    database: 'application',
+    password: 'password',
+    port: 5432
+}
+
 const pgp = require('pg-promise')();
 const db  = pgp(connectionObj);
 
@@ -81,7 +89,8 @@ const {
  const RootMutation = new GraphQLObjectType({
     name: 'CtsPriorityMutation',
     fields: {
-
+        ...CtsPriorityRows,
+        
     }
  });
 

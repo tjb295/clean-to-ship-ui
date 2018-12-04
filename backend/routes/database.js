@@ -6,18 +6,19 @@ const router = express.Router();
 
 
 const client = new pg.Client({
-    user: 'postgres_user',
-    host: '127.0.0.1',
-    database: 'application',
-    password: 'password',
+    user: 'tjb295',
+    host: 'office5',
+    database: 'pinot',
+    password: 'tjb295',
     port: 5432
 })
 
 //connect to database to access clean to ship data
+//successful connection yay
 client.connect();
 
 // promise
-client.query('SELECT * FROM cts_atp_rule' , (err, res) => {
+client.query('SELECT * FROM application.cts_priority_rule' , (err, res) => {
     if(err){
         console.log(err.stack);
     }

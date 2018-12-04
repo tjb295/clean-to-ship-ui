@@ -4,11 +4,11 @@ const bodyParser = require('body-parser');
 var path = require('path');
 
 //graphql setup
-
-
+const expressGql = require('express-graphql');
+const schema = require('./graphql/schemas');
 
 //define routes later
-const databaseRoute = require('./routes/database');
+//const databaseRoute = require('./routes/database');
 
 const app = express();
 
@@ -33,18 +33,21 @@ app.use((req, res, next) => {
   next();
 });
 
-console.log('hel');
 
-// app.use('/graphql', graphql({
-//   schema: schema,
-//   rootValue: root,
-//   graphiql: true
-// }))
 
 app.use('/', express.static(path.join(__dirname, 'build')));
 
+const eql = expressGql({
+  schema,
+  graphiql: true
+});
 
-app.use('/api/database', databaseRoute);
+console.log(eql);
+
+//register graph ql with the express server
+app.use('/graphql', eql);
+
+//app.use('/api/database', databaseRoute);
 console.log('hey');
 
 app.use((req, res, next) => {
